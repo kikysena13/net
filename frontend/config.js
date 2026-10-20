@@ -1,3 +1,3 @@
 window.PORTAL_CONFIG = {
-  apiUrl: "http://127.0.0.1:8000/backend/api.php"
+  apiUrl: "https://net-production-865f.up.railway.app/backend/api.php"
 };
