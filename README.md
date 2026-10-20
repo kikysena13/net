@@ -1,6 +1,6 @@
 # Nusa Campus — Portal Kampus
 
-Portal praktikum dengan frontend HTML/CSS/JavaScript statis dan backend PHP + MySQL. Login menggunakan sesi server, `password_hash()` / `password_verify()`, prepared statements, otorisasi berdasarkan role, dan perlindungan CSRF untuk operasi yang mengubah data.
+Portal praktikum lokal dengan frontend HTML/CSS/JavaScript statis dan backend PHP + MySQL. **Versi ini sengaja menyimpan password plaintext untuk demonstrasi risiko dan API hanya menerima koneksi dari komputer lokal. Jangan deploy backend ini ke internet.** Query tetap menggunakan prepared statements, sesi server, otorisasi berdasarkan role, dan perlindungan CSRF untuk operasi yang mengubah data.
 
 ## Struktur proyek
 
@@ -50,7 +50,7 @@ Pilih **File → Open Folder...** dan buka `C:\xampp\htdocs\portal-kampus`. Jala
 
 ## Fitur
 
-- **Login:** validasi browser dan server, autentikasi sesi, hash password, pesan kesalahan generik, dan pengalihan sesuai role.
+- **Login:** validasi browser dan server, autentikasi sesi lokal, perbandingan password plaintext untuk kebutuhan lab, pesan kesalahan generik, dan pengalihan sesuai role.
 - **Dashboard Admin:** statistik, daftar mahasiswa, tambah/edit/hapus profil dan username login. Password baru wajib minimal 10 karakter; saat edit kosongkan password jika tidak ingin menggantinya.
 - **Dashboard Mahasiswa:** profil, jadwal, ruangan, SKS, dan nilai; backend mencari profil berdasarkan ID dari sesi, bukan ID yang dikirim pengguna.
 - **Keamanan API:** semua query memakai PDO prepared statements. Operasi admin dibatasi role dan token CSRF; sesi memakai cookie HttpOnly dan konfigurasi SameSite.
@@ -84,20 +84,20 @@ Input diperlakukan sebagai bagian dari sintaks SQL, bukan sebagai data terpisah.
 
 ```php
 $statement = $pdo->prepare(
-    'SELECT id, username, password_hash, role FROM users WHERE username = :username LIMIT 1'
+    'SELECT id, username, password, role FROM users WHERE username = :username LIMIT 1'
 );
 $statement->execute(['username' => $username]);
 ```
 
 Prepared statement memastikan input menjadi nilai parameter, bukan sintaks query.
 
-Password plaintext dapat dibaca siapa pun yang memperoleh akses ke dump database dan memperbesar dampak kebocoran (termasuk penggunaan ulang password di layanan lain). Database demo hanya menyimpan hash. Pembuatan akun menggunakan:
+Password plaintext dapat dibaca siapa pun yang memperoleh akses ke dump database dan memperbesar dampak kebocoran (termasuk penggunaan ulang password di layanan lain). **Database dan CRUD proyek ini memang menyimpan password plaintext sebagai demonstrasi lokal.** API menolak koneksi yang bukan dari loopback (`127.0.0.1`/`::1`), tetapi pembatasan ini bukan pengganti hashing.
 
 ```php
 $hash = password_hash($password, PASSWORD_DEFAULT);
 ```
 
-Verifikasi login menggunakan `password_verify($password, $hash)`; jangan membandingkan password terhadap hash yang dibuat manual atau menyimpan password asli. Akun demo hanya untuk lokal dan harus diganti jika aplikasi dipakai lebih jauh.
+Pulihkan keamanan sebelum aplikasi dipakai sungguhan: ubah kolom `password` menjadi `password_hash`, simpan hasil `password_hash()` saat membuat atau memperbarui akun, dan verifikasi login dengan `password_verify($password, $hash)`. Jangan membandingkan password secara langsung atau menyimpan password asli. Reset seluruh password dan hapus mode loopback-only setelah migrasi selesai.
 
 ## Deployment frontend ke GitHub Pages
 
@@ -105,7 +105,7 @@ GitHub Pages hanya menyajikan berkas statis. Ia **tidak** menjalankan PHP atau M
 
 1. Buat repository GitHub baru dan unggah isi folder `frontend` ke root repository (atau set folder publikasi Pages sesuai struktur pilihan).
 2. Di GitHub, buka **Settings → Pages**, pilih branch publikasi dan folder root, lalu simpan. Tunggu URL Pages muncul.
-3. Siapkan API PHP/MySQL pada hosting terpisah. Impor `database/portal_kampus.sql`; ganti akun demo dan buat user database khusus dengan hak minimum. Jangan menggunakan akun MySQL `root` di server publik.
+3. **Jangan deploy backend versi ini:** backend sengaja menyimpan plaintext dan hanya mengizinkan koneksi loopback. Sebelum menyiapkan API PHP/MySQL publik, pulihkan hashing dengan `password_hash()`/`password_verify()`, migrasikan kolom database, reset seluruh password, lalu lakukan review keamanan. Jangan impor akun demo plaintext ke layanan publik.
 4. Atur `PORTAL_ALLOWED_ORIGINS` di server API menjadi origin Pages yang tepat, misalnya `https://nama-user.github.io` (tanpa path). Jangan menggunakan wildcard karena API memakai cookie kredensial.
 5. Atur `PORTAL_SESSION_SAMESITE=None` dan HTTPS pada API untuk frontend/API beda situs. Cookie lintas situs dapat diblokir oleh pengaturan privasi browser; untuk penggunaan nyata, host frontend dan API pada situs yang sama (misalnya subdomain) atau gunakan arsitektur autentikasi yang disediakan hosting.
 6. Ubah `frontend/config.js` menjadi URL HTTPS API, commit, dan push. Jangan mengisi konfigurasi tersebut dengan rahasia database.
