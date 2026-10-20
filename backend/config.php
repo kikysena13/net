@@ -9,7 +9,10 @@ function env_value(string $name, string $default): string
 
 function allowed_origins(): array
 {
-    $configured = env_value('PORTAL_ALLOWED_ORIGINS', 'http://localhost,http://127.0.0.1');
+    $configured = env_value(
+        'PORTAL_ALLOWED_ORIGINS',
+        'http://localhost,http://127.0.0.1,http://localhost:3000,http://127.0.0.1:3000'
+    );
     return array_values(array_filter(array_map('trim', explode(',', $configured))));
 }
 
