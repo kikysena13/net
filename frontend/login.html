@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152d">
+  <title>Masuk — Nusa Campus</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="config.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body class="login-page" data-page="login">
+  <main class="login-shell">
+    <section class="login-art" aria-label="Selamat datang">
+      <a class="brand" href="login.html"><span class="brand-mark">N</span><span>Nusa<span class="brand-light">Campus</span></span></a>
+      <div class="art-content">
+        <span class="eyebrow">PORTAL AKADEMIK</span>
+        <h1>Ruang untuk<br><span>tumbuh dan</span><br>berkarya.</h1>
+        <p>Satu tempat untuk perjalanan akademikmu — dari kelas pertama hingga karya besar berikutnya.</p>
+      </div>
+      <div class="art-footer"><span class="live-dot"></span> Sistem akademik · Tahun ajaran 2026/2027</div>
+      <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    </section>
+    <section class="login-panel">
+      <div class="login-form-wrap">
+        <span class="eyebrow">SELAMAT DATANG KEMBALI</span>
+        <h2>Masuk ke portal</h2>
+        <p class="muted">Gunakan akun kampus untuk melanjutkan.</p>
+        <form id="login-form" class="form-stack">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" required maxlength="50" placeholder="Contoh: 231001">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="255" placeholder="Masukkan password">
+            <button class="password-toggle" type="button" aria-label="Tampilkan password">Lihat</button>
+          </div>
+          <p id="login-error" class="form-message" role="alert" hidden></p>
+          <button class="button button-primary button-wide" type="submit">Masuk ke portal <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="demo-box">
+          <strong>Akun demo lokal</strong>
+          <span>Admin: <code>admin</code> / <code>DemoAdmin123!</code></span>
+          <span>Mahasiswa: <code>231001</code> / <code>DemoMhs123!</code></span>
+        </div>
+        <p class="login-note">Portal kampus · Lingkungan praktikum lokal</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

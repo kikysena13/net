@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152d">
+  <title>Dashboard Admin — Nusa Campus</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="config.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body class="app-page" data-page="admin">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a class="brand" href="admin.html"><span class="brand-mark">N</span><span>Nusa<span class="brand-light">Campus</span></span></a>
+      <div class="sidebar-label">MENU UTAMA</div>
+      <nav class="side-nav"><a class="nav-link active" href="admin.html"><span>▦</span> Ringkasan</a><a class="nav-link" href="#mahasiswa"><span>♙</span> Data mahasiswa</a></nav>
+      <div class="sidebar-bottom"><div class="campus-chip"><span class="campus-icon">✦</span><span><b>Portal Kampus</b><small>Administrasi akademik</small></span></div><button class="nav-link logout-button" type="button"><span>↪</span> Keluar</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><button class="mobile-menu" type="button" aria-label="Buka navigasi">☰</button><div><span class="breadcrumb">Portal /</span> Admin</div><div class="topbar-user"><span class="avatar avatar-purple">A</span><span><b id="user-name">Admin</b><small>Administrator</small></span></div></header>
+      <section class="page-content">
+        <div class="page-heading"><div><span class="eyebrow">SELAMAT DATANG KEMBALI</span><h1>Dashboard Admin</h1><p>Pantau aktivitas dan kelola data akademik kampus.</p></div><span class="date-chip" id="today-date"></span></div>
+        <div id="page-error" class="notice notice-error" role="alert" hidden></div>
+        <section class="stats-grid" aria-label="Statistik kampus">
+          <article class="stat-card"><div class="stat-top"><span>Total mahasiswa</span><span class="stat-icon icon-blue">♙</span></div><strong id="stat-students">—</strong><small>Terdaftar di portal</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Program studi</span><span class="stat-icon icon-violet">◇</span></div><strong id="stat-programs">—</strong><small>Program aktif</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Semester tertinggi</span><span class="stat-icon icon-cyan">⌁</span></div><strong id="stat-semester">—</strong><small>Mahasiswa aktif</small></article>
+        </section>
+        <section class="panel" id="mahasiswa">
+          <div class="panel-heading"><div><h2>Data mahasiswa</h2><p>Tambah, perbarui, atau hapus data mahasiswa.</p></div><span class="result-count" id="student-count">0 mahasiswa</span></div>
+          <form id="student-form" class="student-form">
+            <input type="hidden" name="id">
+            <label>Username<input name="username" required minlength="3" maxlength="50" pattern="[A-Za-z0-9._-]{3,50}" placeholder="username login"></label>
+            <label>NIM<input name="nim" required minlength="4" maxlength="20" pattern="[A-Za-z0-9-]{4,20}" placeholder="Nomor induk"></label>
+            <label>Nama lengkap<input name="nama" required maxlength="100" placeholder="Nama mahasiswa"></label>
+            <label>Program studi<input name="program_studi" required maxlength="100" placeholder="Program studi"></label>
+            <label>Semester<input name="semester" type="number" min="1" max="14" required placeholder="1–14"></label>
+            <label>Password <small id="password-hint">(min. 10 karakter)</small><input name="password" type="password" minlength="10" maxlength="255" placeholder="Wajib untuk data baru"></label>
+            <div class="form-actions"><button id="student-submit" class="button button-primary" type="submit">Tambah mahasiswa</button><button id="student-cancel" class="button button-quiet" type="button" hidden>Batal edit</button></div>
+          </form>
+          <div class="table-wrap"><table><thead><tr><th>Mahasiswa</th><th>NIM</th><th>Program studi</th><th>Semester</th><th>Aksi</th></tr></thead><tbody id="student-rows"><tr><td colspan="5" class="empty-state">Memuat data...</td></tr></tbody></table></div>
+          <p id="admin-message" class="form-message" role="status" hidden></p>
+        </section>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

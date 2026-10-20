@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152d">
+  <title>Dashboard Mahasiswa — Nusa Campus</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="config.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body class="app-page" data-page="student">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a class="brand" href="mahasiswa.html"><span class="brand-mark">N</span><span>Nusa<span class="brand-light">Campus</span></span></a>
+      <div class="sidebar-label">MENU MAHASISWA</div>
+      <nav class="side-nav"><a class="nav-link active" href="mahasiswa.html"><span>▦</span> Ringkasan</a><a class="nav-link" href="#jadwal"><span>▤</span> Jadwal kuliah</a><a class="nav-link" href="#nilai"><span>✧</span> Nilai akademik</a></nav>
+      <div class="sidebar-bottom"><div class="campus-chip"><span class="campus-icon">✦</span><span><b>Tahun Akademik</b><small>2026 / 2027</small></span></div><button class="nav-link logout-button" type="button"><span>↪</span> Keluar</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><button class="mobile-menu" type="button" aria-label="Buka navigasi">☰</button><div><span class="breadcrumb">Portal /</span> Mahasiswa</div><div class="topbar-user"><span class="avatar avatar-blue" id="user-avatar">M</span><span><b id="user-name">Mahasiswa</b><small>Mahasiswa aktif</small></span></div></header>
+      <section class="page-content">
+        <div class="page-heading"><div><span class="eyebrow">PORTAL AKADEMIK</span><h1>Hai, <span id="greeting-name">Mahasiswa</span> <span aria-hidden="true">✦</span></h1><p>Semoga harimu menyenangkan. Berikut ringkasan akademikmu.</p></div><span class="date-chip" id="today-date"></span></div>
+        <div id="page-error" class="notice notice-error" role="alert" hidden></div>
+        <section class="student-hero">
+          <div class="hero-copy"><span class="eyebrow">PROFIL AKADEMIK</span><h2 id="profile-name">Memuat profil...</h2><p id="profile-program">—</p><div class="hero-meta"><span id="profile-nim">NIM —</span><span id="profile-semester">Semester —</span></div></div>
+          <div class="hero-decoration"><div class="hero-orbit"></div><div class="hero-star">✦</div><div class="hero-small-star">✧</div></div>
+        </section>
+        <div class="student-columns">
+          <section class="panel" id="jadwal"><div class="panel-heading"><div><h2>Jadwal kuliah</h2><p>Agenda perkuliahanmu</p></div><span class="panel-icon">▤</span></div><div class="table-wrap"><table><thead><tr><th>Mata kuliah</th><th>Hari & waktu</th><th>Ruangan</th></tr></thead><tbody id="schedule-rows"><tr><td colspan="3" class="empty-state">Memuat jadwal...</td></tr></tbody></table></div></section>
+          <section class="panel" id="nilai"><div class="panel-heading"><div><h2>Nilai akademik</h2><p>Hasil studi terbaru</p></div><span class="panel-icon">✧</span></div><div id="grade-list" class="grade-list"><p class="empty-state">Memuat nilai...</p></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
