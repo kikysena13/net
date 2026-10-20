@@ -85,7 +85,8 @@ function validate_student(array $input, bool $creating): array
 
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 $remoteAddress = $_SERVER['REMOTE_ADDR'] ?? '';
-if (!in_array($remoteAddress, ['127.0.0.1', '::1', '::ffff:127.0.0.1'], true)) {
+if (env_value('PORTAL_ALLOW_REMOTE', '0') !== '1'
+    && !in_array($remoteAddress, ['127.0.0.1', '::1', '::ffff:127.0.0.1'], true)) {
     respond(403, ['error' => 'Mode password plaintext hanya boleh digunakan dari komputer lokal.']);
 }
 if ($origin !== '') {
@@ -111,7 +112,8 @@ $sameSite = env_value('PORTAL_SESSION_SAMESITE', 'Lax');
 if (!in_array($sameSite, ['Lax', 'Strict', 'None'], true)) {
     respond(500, ['error' => 'Konfigurasi SameSite sesi tidak valid.']);
 }
-$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
 if ($sameSite === 'None' && !$isHttps) {
     respond(500, ['error' => 'Cookie SameSite=None memerlukan HTTPS.']);
 }
