@@ -24,10 +24,11 @@ function database_connection(): PDO
     }
 
     $host = env_value('PORTAL_DB_HOST', '127.0.0.1');
+    $port = env_value('PORTAL_DB_PORT', '3306');
     $database = env_value('PORTAL_DB_NAME', 'portal_kampus');
     $username = env_value('PORTAL_DB_USER', 'root');
     $password = env_value('PORTAL_DB_PASSWORD', '');
-    $dsn = "mysql:host={$host};dbname={$database};charset=utf8mb4";
+    $dsn = "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
 
     $pdo = new PDO($dsn, $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
