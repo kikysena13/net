@@ -1,4 +1,4 @@
-# NIH LINK PORALNYA YAA
+# NIH LINK PORTALNYA YAA
 # https://kikysena13.github.io/net/frontend/login.html
 # Nusa Campus — Portal Kampus
 
