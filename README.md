@@ -1,4 +1,5 @@
 # NIH LINK PORALNYA YAA
+# https://kikysena13.github.io/net/frontend/login.html
 # Nusa Campus — Portal Kampus
 
 Portal praktikum lokal dengan frontend HTML/CSS/JavaScript statis dan backend PHP + MySQL. **Versi ini sengaja menyimpan password plaintext untuk demonstrasi risiko dan API hanya menerima koneksi dari komputer lokal. Jangan deploy backend ini ke internet.** Query tetap menggunakan prepared statements, sesi server, otorisasi berdasarkan role, dan perlindungan CSRF untuk operasi yang mengubah data.
